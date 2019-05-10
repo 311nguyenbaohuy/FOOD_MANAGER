@@ -1,0 +1,9 @@
+C:\VSCode\FOOD_MANAGER\Food_Manaer\bin\Debug\Food_Manaer.exe.config
+C:\VSCode\FOOD_MANAGER\Food_Manaer\bin\Debug\Food_Manaer.exe
+C:\VSCode\FOOD_MANAGER\Food_Manaer\bin\Debug\Food_Manaer.pdb
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.csprojAssemblyReference.cache
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.Properties.Resources.resources
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.csproj.GenerateResource.cache
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.csproj.CoreCompileInputs.cache
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.exe
+C:\VSCode\FOOD_MANAGER\Food_Manaer\obj\Debug\Food_Manaer.pdb
