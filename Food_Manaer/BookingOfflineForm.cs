@@ -15,6 +15,8 @@ namespace Food_Manaer
     public partial class BookingOfflineForm : Form
     {
         public static int Emp_id = 3;
+        
+        // Booking_offline_time
         public static int booking_id = 0;
         public static int number_people = 0;
         public static int Floor_id = 0;
@@ -32,9 +34,7 @@ namespace Food_Manaer
             //string query = "SELECT Booking_id AS [Mã đặt chỗ], Num_people[Số lượng người], Floor_id[Tầng] FROM dbo.BOOKING_OFFLINE";
             string query = "SELECT * FROM dbo.v_all_booking_offline";
 
-            DataProvider provider = DataProvider.Instance;
- 
-            dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+            dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
 
         }
 
@@ -43,9 +43,8 @@ namespace Food_Manaer
           
             //string query = "SELECT Booking_id AS [Mã đặt chỗ], Num_people[Số lượng người], Floor_id[Tầng] FROM dbo.BOOKING_OFFLINE";
             string query = "SELECT * FROM dbo.v_all_booking_offline";
-            DataProvider provider = DataProvider.Instance;
-
-            dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+ 
+            dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
             
         }
 
@@ -53,18 +52,16 @@ namespace Food_Manaer
         {
             //string query = "SELECT Booking_id AS [Mã đặt chỗ], Num_people[Số lượng người], Floor_id[Tầng] FROM dbo.BOOKING_OFFLINE WHERE Status = 1";
             string query = "SELECT * FROM dbo.v_checked_booking_offline";
-            DataProvider provider = DataProvider.Instance;
 
-            dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+            dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
         }
 
         private void rBtnUnSuccess_CheckedChanged(object sender, EventArgs e)
         {
             //string query = "SELECT Booking_id AS [Mã đặt chỗ], Num_people[Số lượng người], Floor_id[Tầng] FROM dbo.BOOKING_OFFLINE WHERE Status = 0";
             string query = "SELECT * FROM dbo.v_Unchecked_booking_offline";
-            DataProvider provider = DataProvider.Instance;
 
-            dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+            dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
 
         }
 
@@ -88,8 +85,7 @@ namespace Food_Manaer
         private void Delete_Click (object sender, EventArgs e)
         {
             string query = "DELETE FROM dbo.BOOKING_OFFLINE WHERE Booking_id = " + booking_id.ToString();
-            DataProvider provider = DataProvider.Instance;
-            dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+            dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
             BookingOfflineForm_Load(sender, e);
             MessageBox.Show("Xoá thành công.", "Thông báo");
             
@@ -130,8 +126,7 @@ namespace Food_Manaer
             else
             {
                 string query = "EXEC dbo.p_search_booking_offline " + bookingID.ToString() +", " + floorID.ToString() +", " + tableID.ToString();
-                DataProvider provider = DataProvider.Instance;
-                dtgvBookingOffline.DataSource = provider.ExecuteQuery(query);
+                dtgvBookingOffline.DataSource = DataProvider.Instance.ExecuteQuery(query);
             }
         }
 
@@ -145,11 +140,12 @@ namespace Food_Manaer
             }
             else
             {
-                DataProvider provider = DataProvider.Instance;
                 int number_people = Int32.Parse(strNumberPeople);
                 int floor_id = Int32.Parse(strFloor);
-                string query = "EXEC dbo.p_emp_add_booking_offline " + number_people.ToString() + ", " + Emp_id.ToString() + ", " + floor_id.ToString();
-                int returnValue = provider.ExecuteNonQuery(query);
+                string query = "EXEC dbo.p_emp_add_booking_offline @number , @emp_id , @floor_id ";
+ 
+                int returnValue = DataProvider.Instance.ExecuteNonQuery(query,
+                        new object[] {number_people, Emp_id, floor_id });
 
                 if (returnValue == -2)
                 {
@@ -175,7 +171,7 @@ namespace Food_Manaer
             }       
         }
 
-        private void BookingOfflineForm_Load(object sender, EventArgs e)
+        public void BookingOfflineForm_Load(object sender, EventArgs e)
         {
             LoadListBookingOffline();
             rBtnAll.Checked = true;

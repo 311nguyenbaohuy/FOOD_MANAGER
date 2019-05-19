@@ -168,9 +168,8 @@ namespace Food_Manaer
             {
                 DataProvider.Instance.ExecuteNonQuery("INSERT INTO dbo.CONTAINTS VALUES (" + idFood + " ," + id_Bill + " ," + number + ")");
             }
-            DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.FOOD SET Stock = Stock - " + number + " WHERE Food_id = " + idFood);
             nudNumber.Value = 0;
-            nudNumber1.Value = 0;
+            nudNumber1.Value = 1;
             ShowBill(table_Id, floor_Id, status);
         }
 
@@ -195,9 +194,12 @@ namespace Food_Manaer
             int amountFood;
             int idFood = int.Parse(DataProvider.Instance.ExecuteScalar("SELECT Food_id FROM dbo.FOOD WHERE Food_name = N'" + nameFood + "'").ToString());
             amountFood = int.Parse(DataProvider.Instance.ExecuteScalar("SELECT Amount FROM dbo.CONTAINTS WHERE Food_id = " + idFood + " AND Bill_id = " + id_Bill).ToString());
-            if (amountFood == int.Parse(numberDelete)) DataProvider.Instance.ExecuteNonQuery("DELETE dbo.CONTAINTS WHERE Food_id = " + idFood + " AND Bill_id = " + id_Bill);
+            if (amountFood == int.Parse(numberDelete))
+            {
+                DataProvider.Instance.ExecuteNonQuery("DELETE dbo.CONTAINTS WHERE Food_id = " + idFood + " AND Bill_id = " + id_Bill);
+                DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.FOOD SET Stock = Stock + " + numberDelete + " WHERE Food_id = " + idFood);
+            }
             else DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.CONTAINTS SET Amount = Amount - " + numberDelete + " WHERE Food_id = " + idFood + " AND Bill_id = " + id_Bill);
-            DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.FOOD SET Stock = Stock + " + numberDelete + " WHERE Food_id = " + idFood);
             nudNumber.Value = 0;
             nudNumber1.Value = 1;
             ShowBill(table_Id, floor_Id, status);
@@ -267,18 +269,17 @@ namespace Food_Manaer
             new_Form.reportViewer2.LocalReport.SetParameters(reportParameters);
             new_Form.reportViewer2.LocalReport.DataSources.Add(rds);
             new_Form.reportViewer2.LocalReport.Refresh();
+            DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.BILL SET Status = 1 WHERE Bill_id = " + id_Bill);
+            tableFood.Image = new Bitmap(Application.StartupPath + "\\" + "TableFood2.png");
+            tableFood.Text = "Tầng: " + floor_Id + ", Bàn: " + table_Id + Environment.NewLine + "Trống";
+            tableFood.Tag = floor_Id + " " + table_Id + " " + "Trống";
             txbSumMoney.Text = "";
             rdbDrink.Checked = rdbFood.Checked = false;
             nudSale.Value = 0;
             nudNumber.Value = 0;
+            nudNumber1.Value = 1;
             cbDish.DataSource = null;
-            //DataProvider.Instance.ExecuteNonQuery("UPDATE dbo.BILL SET Status = 1 WHERE Bill_id = " + id_Bill);
-            //tableFood.Image = new Bitmap(Application.StartupPath + "\\" + "TableFood2.png");
-            //tableFood.Text = "Tầng: " + floor_Id + ", Bàn: " + table_Id + Environment.NewLine + "Trống";
-            //DataProvider.Instance.ExecuteNonQuery("DELETE dbo.CONTAINTS WHERE Bill_id = " + id_Bill);
-            //DataProvider.Instance.ExecuteNonQuery("DELETE dbo.BOOKING_OFFLINE WHERE Bill_id = " + id_Bill);
-            nudSale.Value = 0;
-            ShowBill(table_Id, floor_Id, status);
+            ShowBill(table_Id, floor_Id, "Trống");
             new_Form.ShowDialog();
         }
 

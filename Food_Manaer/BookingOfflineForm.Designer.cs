@@ -280,7 +280,6 @@
             this.Controls.Add(this.panelOption);
             this.Controls.Add(this.panelData);
             this.Name = "BookingOfflineForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh sách đặt bàn tại chỗ";
             this.Load += new System.EventHandler(this.BookingOfflineForm_Load);
             this.panelData.ResumeLayout(false);

@@ -34,8 +34,6 @@
             this.lbBookingID = new System.Windows.Forms.Label();
             this.checkStatus = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -49,8 +47,6 @@
             this.groupBox3.Controls.Add(this.lbBookingID);
             this.groupBox3.Controls.Add(this.checkStatus);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBox5);
-            this.groupBox3.Controls.Add(this.textBox2);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.btnUpdate);
@@ -107,22 +103,6 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Trạng thái";
             // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(255, 126);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(83, 20);
-            this.textBox5.TabIndex = 22;
-            this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(255, 72);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(83, 20);
-            this.textBox2.TabIndex = 16;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -149,6 +129,7 @@
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "CẬP NHẬT";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // UpdateBookingOfflineForm
             // 
@@ -157,9 +138,7 @@
             this.ClientSize = new System.Drawing.Size(394, 260);
             this.Controls.Add(this.groupBox3);
             this.Name = "UpdateBookingOfflineForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cập nhật";
-            this.Load += new System.EventHandler(this.UpdateBookingOfflineForm_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -169,8 +148,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnUpdate;
